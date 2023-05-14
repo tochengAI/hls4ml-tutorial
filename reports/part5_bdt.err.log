@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+cnf = conifer.model(clf, conifer.converters.sklearn, conifer.backends.vivadohls, cfg)
+cnf.compile()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[6], line 1[0m
+[0;32m----> 1[0m cnf [38;5;241m=[39m [43mconifer[49m[38;5;241;43m.[39;49m[43mmodel[49m[43m([49m[43mclf[49m[43m,[49m[43m [49m[43mconifer[49m[38;5;241;43m.[39;49m[43mconverters[49m[38;5;241;43m.[39;49m[43msklearn[49m[43m,[49m[43m [49m[43mconifer[49m[38;5;241;43m.[39;49m[43mbackends[49m[38;5;241;43m.[39;49m[43mvivadohls[49m[43m,[49m[43m [49m[43mcfg[49m[43m)[49m
+[1;32m      2[0m cnf[38;5;241m.[39mcompile()
+
+File [0;32m/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/conifer/model.py:13[0m, in [0;36mmodel.__init__[0;34m(self, bdt, converter, backend, config)[0m
+[1;32m     12[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, bdt, converter, backend[38;5;241m=[39mbackends[38;5;241m.[39mxilinxhls, config[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m---> 13[0m     [38;5;28mself[39m[38;5;241m.[39m_ensembleDict [38;5;241m=[39m [43mconverter[49m[38;5;241;43m.[39;49m[43mconvert[49m[43m([49m[43mbdt[49m[43m)[49m
+[1;32m     14[0m     [38;5;28mself[39m[38;5;241m.[39mbackend [38;5;241m=[39m backend
+[1;32m     15[0m     logger[38;5;241m.[39minfo([38;5;124mf[39m[38;5;124m'[39m[38;5;124mConverting BDT with [39m[38;5;132;01m{[39;00mconverter[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m}[39;00m[38;5;124m converter and [39m[38;5;132;01m{[39;00mbackend[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m}[39;00m[38;5;124m backend[39m[38;5;124m'[39m)
+
+File [0;32m/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/conifer/converters/sklearn.py:44[0m, in [0;36mconvert[0;34m(bdt)[0m
+[1;32m     42[0m [38;5;28;01mdef[39;00m [38;5;21mconvert[39m(bdt):
+[1;32m     43[0m     [38;5;28;01mif[39;00m [38;5;124m'[39m[38;5;124mGradientBoosting[39m[38;5;124m'[39m [38;5;129;01min[39;00m bdt[38;5;241m.[39m[38;5;18m__class__[39m[38;5;241m.[39m[38;5;18m__name__[39m:
+[0;32m---> 44[0m         [38;5;28;01mreturn[39;00m [43mconvert_bdt[49m[43m([49m[43mbdt[49m[43m)[49m
+[1;32m     45[0m     [38;5;28;01melif[39;00m [38;5;124m'[39m[38;5;124mRandomForest[39m[38;5;124m'[39m [38;5;129;01min[39;00m bdt[38;5;241m.[39m[38;5;18m__class__[39m[38;5;241m.[39m[38;5;18m__name__[39m:
+[1;32m     46[0m         [38;5;28;01mreturn[39;00m convert_random_forest(bdt)
+
+File [0;32m/usr/share/miniconda/envs/hls4ml-tutorial/lib/python3.10/site-packages/conifer/converters/sklearn.py:7[0m, in [0;36mconvert_bdt[0;34m(bdt)[0m
+[1;32m      5[0m [38;5;28;01mdef[39;00m [38;5;21mconvert_bdt[39m(bdt):
+[1;32m      6[0m   ensembleDict [38;5;241m=[39m {[38;5;124m'[39m[38;5;124mmax_depth[39m[38;5;124m'[39m : bdt[38;5;241m.[39mmax_depth, [38;5;124m'[39m[38;5;124mn_trees[39m[38;5;124m'[39m : bdt[38;5;241m.[39mn_estimators,
+[0;32m----> 7[0m                   [38;5;124m'[39m[38;5;124mn_features[39m[38;5;124m'[39m : [43mbdt[49m[38;5;241;43m.[39;49m[43mn_features_[49m,
+[1;32m      8[0m                   [38;5;124m'[39m[38;5;124mn_classes[39m[38;5;124m'[39m : bdt[38;5;241m.[39mn_classes_, [38;5;124m'[39m[38;5;124mtrees[39m[38;5;124m'[39m : [],
+[1;32m      9[0m                   [38;5;124m'[39m[38;5;124minit_predict[39m[38;5;124m'[39m : bdt[38;5;241m.[39m_raw_predict_init(np[38;5;241m.[39mzeros(bdt[38;5;241m.[39mn_features_)[38;5;241m.[39mreshape([38;5;241m1[39m, [38;5;241m-[39m[38;5;241m1[39m))[[38;5;241m0[39m][38;5;241m.[39mtolist(),
+[1;32m     10[0m                   [38;5;124m'[39m[38;5;124mnorm[39m[38;5;124m'[39m : [38;5;241m1[39m}
+[1;32m     11[0m   [38;5;28;01mfor[39;00m trees [38;5;129;01min[39;00m bdt[38;5;241m.[39mestimators_:
+[1;32m     12[0m     treesl [38;5;241m=[39m []
+
+[0;31mAttributeError[0m: 'GradientBoostingClassifier' object has no attribute 'n_features_'
+
